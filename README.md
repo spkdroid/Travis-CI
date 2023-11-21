@@ -59,3 +59,59 @@ deploy:
 ```
 
 In this example, the `deploy` section is configured to deploy the application to Heroku. Replace `your-heroku-app-name` with the actual name of your Heroku app. Ensure you set the `HEROKU_API_KEY` environment variable in the Travis CI repository settings.
+
+
+Certainly! If you want to add notifications to your Travis CI script, you can use Travis CI's built-in notifications. Below is an example of how you can extend your `.travis.yml` file to include notifications:
+
+```yaml
+language: java
+jdk:
+  - openjdk11
+
+# Specify the script to run for the build
+script:
+  - ./gradlew test
+
+# Optional: Define notifications
+notifications:
+  email:
+    recipients:
+      - your.email@example.com
+    on_success: always
+    on_failure: always
+```
+
+### Step 5: Notification Setup
+
+In this example, notifications are configured to be sent via email. You should replace `your.email@example.com` with your actual email address.
+
+Here's what each part does:
+
+- `on_success: always`: Sends an email notification when the build succeeds.
+- `on_failure: always`: Sends an email notification when the build fails.
+
+You can customize the notifications based on your preferences and the available notification providers supported by Travis CI. For example, you can integrate with popular messaging services like Slack or notify specific channels.
+
+Here's an example with Slack notifications:
+
+```yaml
+language: java
+jdk:
+  - openjdk11
+
+# Specify the script to run for the build
+script:
+  - ./gradlew test
+
+# Optional: Define notifications for Slack
+notifications:
+  slack:
+    rooms:
+      - secure: "encrypted_slack_token"
+    on_success: always
+    on_failure: always
+```
+
+To set up Slack notifications, you'll need to encrypt your Slack token using Travis CI's encryption tools. Replace `"encrypted_slack_token"` with the actual encrypted token.
+
+Remember to adjust the notification settings based on your project requirements and the notification channels you want to use.
